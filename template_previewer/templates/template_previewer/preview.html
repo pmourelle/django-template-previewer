@@ -12,21 +12,28 @@
         <script type="text/javascript">
             var parse_url = "{% filter escapejs %}{% url parse %}{% endfilter %}";
         </script>
+        <script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/template_previewer/previewer.js' %}"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $('#preview-ui-wrapper').draggable({axis:"x"});
+        });</script>
     </head>
+
     <body>
-        <div id="preview-ui">
-            <p id="hide-preview"><a href="#">Template previewer ▾</a></p>
-            <form method="post" action="{{ render_url }}" target="content-preview">
-                {% csrf_token %}
-                {{ form }}
-                <button id="get-context" href="#">Update context</button><input type="submit" id="preview-submit" value="Preview">
-            </form>
-            <div id="context-tree">
-                <p class="help">Enter a template name and click on "Update context"</p>
+        <div id="preview-ui-wrapper" class="center">
+            <h3 id="toggle-preview"><a href="#">Show/Hide template preview</a></h3>
+            <div id="preview-ui">
+                <form method="post" action="{{ render_url }}" target="content-preview">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button id="get-context" href="#">Update context</button><input type="submit" id="preview-submit" value="Preview">
+                </form>
+                <div id="context-tree">
+                    <p class="help">Enter a template name and click on "Update context". <a href="https://github.com/machinalis/django-template-previewer" target="_blank">More info here</a></p>
+                </div>
             </div>
         </div>
-        <p id="show-preview"><a href="#">Template previewer ▸</a></p>
         <iframe id="content-preview" name="content-preview" sandbox="allow-scripts">
         </iframe>
     </body>
