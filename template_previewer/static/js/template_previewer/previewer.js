@@ -101,8 +101,7 @@ $(function () {
     $("#get-context").click(getContext);
     $("#preview-submit").click(sendContext);
     var togglePreview = function () {$("#preview-ui").fadeToggle();};
-    $("#hide-preview").click(togglePreview);
-    $("#show-preview").click(togglePreview);
+    $("#toggle-preview").click(togglePreview);
 
     /* If the template name is updated, the list of context vars must be
      * updated too. So show only the update button but not the preview button
